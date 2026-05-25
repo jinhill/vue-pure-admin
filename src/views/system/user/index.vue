@@ -5,7 +5,6 @@ import { useUser } from "./utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
-import Upload from "~icons/ri/upload-line";
 import Role from "~icons/ri/admin-line";
 import Password from "~icons/ri/lock-password-line";
 import More from "~icons/ep/more-filled";
@@ -40,7 +39,6 @@ const {
   onTreeSelect,
   handleUpdate,
   handleDelete,
-  handleUpload,
   handleReset,
   handleRole,
   handleSizeChange,
@@ -207,18 +205,6 @@ const {
                 />
                 <template #dropdown>
                   <el-dropdown-menu>
-                    <el-dropdown-item>
-                      <el-button
-                        :class="buttonClass"
-                        link
-                        type="primary"
-                        :size="size"
-                        :icon="useRenderIcon(Upload)"
-                        @click="handleUpload(row)"
-                      >
-                        上传头像
-                      </el-button>
-                    </el-dropdown-item>
                     <el-dropdown-item>
                       <el-button
                         :class="buttonClass"

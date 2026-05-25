@@ -1,7 +1,5 @@
 <script setup lang="tsx">
 import { ref } from "vue";
-import "vue-json-pretty/lib/styles.css";
-import VueJsonPretty from "vue-json-pretty";
 
 const props = defineProps({
   data: {
@@ -92,7 +90,7 @@ const dataList = ref([
         :label="item.title"
       >
         <el-scrollbar max-height="calc(100vh - 240px)">
-          <vue-json-pretty v-model:data="item.data" />
+          <pre class="bg-(--el-fill-color-light) p-4 rounded text-sm overflow-auto text-left font-mono">{{ JSON.stringify(item.data, null, 2) }}</pre>
         </el-scrollbar>
       </el-tab-pane>
     </el-tabs>

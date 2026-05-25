@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { readdir, stat } from "node:fs";
+import { readdir, stat, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { sum, formatBytes } from "@pureadmin/utils";
@@ -10,6 +10,7 @@ import {
   dependencies,
   devDependencies
 } from "../package.json";
+
 
 /** 启动`node`进程时所在工作目录的绝对路径 */
 const root: string = process.cwd();
@@ -82,8 +83,11 @@ const fileListTotal: number[] = [];
 /** 获取指定文件夹中所有文件的总大小 */
 const getPackageSize = options => {
   const { folder = "dist", callback, format = true } = options;
+  if (!existsSync(folder)) {
+    return callback(0);
+  }
   readdir(folder, (err, files: string[]) => {
-    if (err) throw err;
+    if (err) return callback(0);
     let count = 0;
     const checkEnd = () => {
       ++count == files.length &&
@@ -91,7 +95,7 @@ const getPackageSize = options => {
     };
     files.forEach((item: string) => {
       stat(`${folder}/${item}`, async (err, stats) => {
-        if (err) throw err;
+        if (err) return checkEnd();
         if (stats.isFile()) {
           fileListTotal.push(stats.size);
           checkEnd();
