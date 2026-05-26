@@ -2,12 +2,6 @@
 import { defineFakeRoute } from "vite-plugin-fake-server/client";
 import { system, monitor } from "@/router/enums";
 
-/**
- * roles：页面级别权限，这里模拟二种 "admin"、"common"
- * admin：管理员角色
- * common：普通角色
- */
-
 const systemManagementRouter = {
   path: "/system",
   meta: {
@@ -114,10 +108,7 @@ export default defineFakeRoute([
       return {
         code: 0,
         message: "操作成功",
-        data: [
-          systemManagementRouter,
-          systemMonitorRouter
-        ]
+        data: [systemManagementRouter, systemMonitorRouter]
       };
     }
   }
